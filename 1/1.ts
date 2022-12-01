@@ -10,9 +10,10 @@ const sumElfCalories = (elfLines: string) => {
 
 const elvesCalories = content.split("\n\n")
                              .map(el => sumElfCalories(el))
-                             .sort((x,y) => y - x)  //not useful for part 1
+
+const sortedElvesCalories = elvesCalories.sort((x,y) => y - x)  //not useful for part 1
 
 console.log("First part:", Math.max(...elvesCalories))           
-console.log("Second part:", elvesCalories.slice(0, 3).reduce((x,y) => x + y))
+console.log("Second part:", sortedElvesCalories.slice(0, 3).reduce((x,y) => x + y))
 
 
