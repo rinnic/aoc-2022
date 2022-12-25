@@ -1,22 +1,6 @@
 import { readFileSync } from "fs";
 
-
-
 const cave = new Map<string, string>();
-
-const printCave = () => {
-  for (let i = 0; i < 14; i++) {
-    process.stdout.write(`${i}`);
-    for (let j = 485; j < 510; j++) {
-      if (cave.has(`${i},${j}`)) {
-        process.stdout.write(cave.get(`${i},${j}`) || "");
-      } else {
-        process.stdout.write(".");
-      }
-    }
-    console.log();
-  }
-}
 
 const input = readFileSync("14.in", "utf-8").split("\n");
 
@@ -49,16 +33,16 @@ for (const path of paths) {
 }
 
 let ground = maxDepth + 2;
-let part1 = 0;
+let part2 = 0;
 let i = 0;
 let j = 500;
 
-while (i < maxDepth) {
+while (true) {
+  if (cave.has(`0,500`)) break;
   i = 0;
   j = 500;
-  console.log(ground)
   let blocked = false;
-  while (!blocked && i < maxDepth) {
+  while (!blocked && i < ground - 1) {
     if (!cave.has(`${i + 1},${j}`)) {
       //step down
       i += 1;
@@ -72,16 +56,11 @@ while (i < maxDepth) {
       j += 1;
     } else {
       // stop
-      cave.set(`${i},${j}`, "O");
       blocked = true;
     }
   }
-  
-  printCave()
-  part1 += 1;
+  cave.set(`${i},${j}`, "O");
+  part2 += 1;
 }
 
-
-
-
-console.log("part1:", --part1);
+console.log("part2:", part2);
