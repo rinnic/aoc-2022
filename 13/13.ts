@@ -68,13 +68,15 @@ let packets = input
   .split("\n")
   .filter((packet) => packet != "")
   .map((packet) => parseList(packet, 0)[0]);
+
 packets = [[[2]], [[6]], ...packets].sort((p1, p2) =>
   arePacketsInOrder(p1, p2)
 );
 
 let part2 = 1;
 packets.forEach((p, i) => {
-  if (JSON.stringify(p) === "[[2]]" || JSON.stringify(p) === "[[6]]") {
+  const strP = JSON.stringify(p)
+  if (strP === "[[2]]" || strP === "[[6]]") {
     console.log(packets[i], i + 1);
     part2 *= i + 1;
   }
